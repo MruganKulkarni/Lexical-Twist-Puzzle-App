@@ -21,8 +21,14 @@ public class LexicalTwistPuzzle {
             return;
         }
 
-        System.out.println("First Word: " + word1);
-        System.out.println("Second Word: " + word2);
+        // Reverse check logic
+        String reversedWord1 = new StringBuilder(word1).reverse().toString();
+
+        if (reversedWord1.equals(word2)) {
+            System.out.println("Words form a lexical twist pair.");
+        } else {
+            System.out.println("Words do not form a lexical twist pair.");
+        }
 
         scanner.close();
     }
