@@ -4,9 +4,12 @@ public class LexicalTwistPuzzle {
 
     public static void main(String[] args) {
 
-        System.out.println("Lexical Twist Puzzle");
-
         Scanner scanner = new Scanner(System.in);
+
+        WordValidator validator = new WordValidator();
+        LexicalAnalyzer analyzer = new LexicalAnalyzer();
+
+        System.out.println("Lexical Twist Puzzle");
 
         System.out.print("Enter first word: ");
         String word1 = scanner.nextLine();
@@ -14,47 +17,26 @@ public class LexicalTwistPuzzle {
         System.out.print("Enter second word: ");
         String word2 = scanner.nextLine();
 
-        // Validate single-word constraint
-        if (word1.contains(" ") || word2.contains(" ")) {
+        if (!validator.isValidWord(word1) || !validator.isValidWord(word2)) {
             System.out.println("Invalid input! Please enter single words only.");
             scanner.close();
             return;
         }
 
-        String reversedWord1 = new StringBuilder(word1).reverse().toString();
-
-        if (reversedWord1.equals(word2)) {
+        if (analyzer.isTwistPair(word1, word2)) {
 
             System.out.println("Words form a lexical twist pair.");
 
-            String transformedWord = word1.toUpperCase();
-            System.out.println("Transformed Word: " + transformedWord);
+            String transformed = analyzer.transformWord(word1);
+            System.out.println("Transformed Word: " + transformed);
 
             String combined = word1 + word2;
+            int[] counts = analyzer.countVowelsAndConsonants(combined);
 
-            int vowelCount = 0;
-            int consonantCount = 0;
+            System.out.println("Vowel Count: " + counts[0]);
+            System.out.println("Consonant Count: " + counts[1]);
 
-            for (char ch : combined.toLowerCase().toCharArray()) {
-
-                if ("aeiou".indexOf(ch) != -1) {
-                    vowelCount++;
-                } else if (Character.isLetter(ch)) {
-                    consonantCount++;
-                }
-            }
-
-            System.out.println("Vowel Count: " + vowelCount);
-            System.out.println("Consonant Count: " + consonantCount);
-
-            // Rule-based output logic
-            if (vowelCount > consonantCount) {
-                System.out.println("Vowel Dominant Twist!");
-            } else if (consonantCount > vowelCount) {
-                System.out.println("Consonant Dominant Twist!");
-            } else {
-                System.out.println("Balanced Twist!");
-            }
+            System.out.println(analyzer.getTwistCategory(counts[0], counts[1]));
 
         } else {
             System.out.println("Words do not form a lexical twist pair.");
