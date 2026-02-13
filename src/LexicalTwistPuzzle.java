@@ -30,7 +30,6 @@ public class LexicalTwistPuzzle {
             String transformedWord = word1.toUpperCase();
             System.out.println("Transformed Word: " + transformedWord);
 
-            // Combine words
             String combined = word1 + word2;
 
             int vowelCount = 0;
@@ -47,6 +46,15 @@ public class LexicalTwistPuzzle {
 
             System.out.println("Vowel Count: " + vowelCount);
             System.out.println("Consonant Count: " + consonantCount);
+
+            // Rule-based output logic
+            if (vowelCount > consonantCount) {
+                System.out.println("Vowel Dominant Twist!");
+            } else if (consonantCount > vowelCount) {
+                System.out.println("Consonant Dominant Twist!");
+            } else {
+                System.out.println("Balanced Twist!");
+            }
 
         } else {
             System.out.println("Words do not form a lexical twist pair.");
