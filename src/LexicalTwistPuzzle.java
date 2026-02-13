@@ -27,9 +27,26 @@ public class LexicalTwistPuzzle {
 
             System.out.println("Words form a lexical twist pair.");
 
-            // Transform word1
             String transformedWord = word1.toUpperCase();
             System.out.println("Transformed Word: " + transformedWord);
+
+            // Combine words
+            String combined = word1 + word2;
+
+            int vowelCount = 0;
+            int consonantCount = 0;
+
+            for (char ch : combined.toLowerCase().toCharArray()) {
+
+                if ("aeiou".indexOf(ch) != -1) {
+                    vowelCount++;
+                } else if (Character.isLetter(ch)) {
+                    consonantCount++;
+                }
+            }
+
+            System.out.println("Vowel Count: " + vowelCount);
+            System.out.println("Consonant Count: " + consonantCount);
 
         } else {
             System.out.println("Words do not form a lexical twist pair.");
